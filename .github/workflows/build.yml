@@ -26,7 +26,7 @@ jobs:
     - name: Push Docker image
       run: docker push ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-back
 
-   steps:
+    steps:
 
     - name: Checkout repo
     - uses: actions/checkout@v4
@@ -40,6 +40,6 @@ jobs:
 
     - name: Build back
       run: docker build ./front -t ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-front
-      
+
     - name: Push Docker image
       run: docker push ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-front
