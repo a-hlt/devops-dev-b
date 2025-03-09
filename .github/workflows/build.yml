@@ -1,9 +1,9 @@
-name: Build 
+name: build
 on:
   push:
     branches:
-      - feature/RunTest
-
+      - feature-/RunTest
+ 
 jobs:
   build:
     runs-on: ubuntu-latest
