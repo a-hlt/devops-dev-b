@@ -4,42 +4,30 @@ on:
   push:
     branches:
       - feature/RunTest
- 
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Login to Scaleway Container Registry
-      uses: docker/login-action@v3
-      with:
-        username: nologin
-        password: ${{ secrets.SCALEWAY_API_KEY }}
-        registry: ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}
+      - name: Login to Scaleway Container Registry
+        uses: docker/login-action@v3
+        with:
+          username: nologin
+          password: ${{ secrets.SCALEWAY_API_KEY }}
+          registry: ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}
 
-    - name: Build back
-      run: docker build ./back -t ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-back
+      - name: Build back
+        run: docker build ./back -t ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-back
 
-    - name: Push Docker image
-      run: docker push ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-back
+      - name: Push Docker image
+        run: docker push ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-back
 
-    steps:
+      - name: Build front
+        run: docker build ./front -t ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-front
 
-    - name: Checkout repo
-    - uses: actions/checkout@v4
-
-    - name: Login to Scaleway Container Registry
-      uses: docker/login-action@v3
-      with:
-        username: nologin
-        password: ${{ secrets.SCALEWAY_API_KEY }}
-        registry: ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}
-
-    - name: Build back
-      run: docker build ./front -t ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-front
-
-    - name: Push Docker image
-      run: docker push ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-front
+      - name: Push Docker image
+        run: docker push ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-front
