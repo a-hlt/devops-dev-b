@@ -31,3 +31,40 @@ jobs:
 
       - name: Push Docker image
         run: docker push ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-front
+
+deploy:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Scaleway Container Deploy action Back
+      uses: philibea/scaleway-containers-deploy@v1.0.5
+      with:
+        type: deploy
+        env: DEPLOYMENT_NAME=ynov-devops-back
+        scw_access_key: ${{ secrets.SCALEWAY_ACCESS_KEY }}
+        scw_secret_key: ${{ secrets.SCALEWAY_API_KEY }}
+        scw_containers_namespace_id: ${{ secrets.SCALEWAY_CONTAINER_NAMESPACE_ID }}
+        scw_registry: ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}
+        scw_secrets: ${{ secrets.SCALEWAY_SECRETS/devops-back }}
+        scw_container_port: 3000
+        scw_memory_limit: 128
+        scw_min_scale: 0
+        scw_max_scale: 1
+        scw_max_concurrency: 1
+        scw_cpu_limit: 2
+
+    - name: Scaleway Container Deploy action Front
+      uses: philibea/scaleway-containers-deploy@v1.0.5
+      with:
+        type: deploy
+        env: DEPLOYMENT_NAME=ynov-devops-front
+        scw_access_key: ${{ secrets.SCALEWAY_ACCESS_KEY }}
+        scw_secret_key: ${{ secrets.SCALEWAY_API_KEY }}
+        scw_containers_namespace_id: ${{ secrets.SCALEWAY_CONTAINER_NAMESPACE_ID }}
+        scw_registry: ${{ secrets.CONTAINER_REGISTRY_ENDPOINT/devops-front }}
+        scw_secrets: ${{ secrets.SCALEWAY_SECRETS }}
+        scw_container_port: 80
+        scw_memory_limit: 128
+        scw_min_scale: 0
+        scw_max_scale: 1
+        scw_max_concurrency: 1
+        scw_cpu_limit: 2
