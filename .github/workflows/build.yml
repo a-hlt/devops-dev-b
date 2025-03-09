@@ -43,8 +43,8 @@ jobs:
           scw_access_key: ${{ secrets.SCALEWAY_ACCESS_KEY }}
           scw_secret_key: ${{ secrets.SCALEWAY_API_KEY }}
           scw_containers_namespace_id: ${{ secrets.SCALEWAY_CONTAINER_NAMESPACE_ID }}
-          scw_registry: ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}
-          scw_secrets: ${{ secrets.SCALEWAY_SECRETS/devops-back }}
+          scw_registry: ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-back
+          scw_secrets: ${{ secrets.SCALEWAY_SECRETS }}
           scw_container_port: 3000
           scw_memory_limit: 128
           scw_min_scale: 0
@@ -60,7 +60,7 @@ jobs:
           scw_access_key: ${{ secrets.SCALEWAY_ACCESS_KEY }}
           scw_secret_key: ${{ secrets.SCALEWAY_API_KEY }}
           scw_containers_namespace_id: ${{ secrets.SCALEWAY_CONTAINER_NAMESPACE_ID }}
-          scw_registry: ${{ secrets.CONTAINER_REGISTRY_ENDPOINT/devops-front }}
+          scw_registry: ${{ secrets.CONTAINER_REGISTRY_ENDPOINT }}/devops-front
           scw_secrets: ${{ secrets.SCALEWAY_SECRETS }}
           scw_container_port: 80
           scw_memory_limit: 128
