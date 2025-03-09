@@ -39,7 +39,6 @@ jobs:
         uses: philibea/scaleway-containers-deploy@v1.0.5
         with:
           type: deploy
-          env: DEPLOYMENT_NAME=ynov-devops-back
           scw_access_key: ${{ secrets.SCALEWAY_ACCESS_KEY }}
           scw_secret_key: ${{ secrets.SCALEWAY_API_KEY }}
           scw_containers_namespace_id: ${{ secrets.SCALEWAY_CONTAINER_NAMESPACE_ID }}
@@ -56,7 +55,6 @@ jobs:
         uses: philibea/scaleway-containers-deploy@v1.0.5
         with:
           type: deploy
-          env: DEPLOYMENT_NAME=ynov-devops-front
           scw_access_key: ${{ secrets.SCALEWAY_ACCESS_KEY }}
           scw_secret_key: ${{ secrets.SCALEWAY_API_KEY }}
           scw_containers_namespace_id: ${{ secrets.SCALEWAY_CONTAINER_NAMESPACE_ID }}
